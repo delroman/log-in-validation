@@ -1,0 +1,127 @@
+<html>
+
+<head>
+    <title>Log-in Validation</title>
+
+    <style>
+        body {
+            background-image: url(istockphoto-1137996207-612x612.jpg);
+            background-position: top;
+            background-size: cover;
+            font-family: Arial, Helvetica, sans-serif;
+            padding-top: 130px;
+
+        }
+
+        div {
+            padding-top: 40px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            background-color: rgba(221, 221, 221, 53%);
+            padding: 20px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 53%);
+            width: 300px;
+            height: 320px;
+        }
+
+        input[type=text],
+        input[type=password] {
+            background-color: rgba(221, 221, 221, 53%);
+            border: 0;
+            border-bottom: 1px solid #585757;
+            width: 180px;
+            padding: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            border-radius: 12px;
+            border: 0;
+            padding: 10px;
+            font-size: 14px;
+            background-color: rgb(10, 32, 73);
+            color: rgb(232, 236, 243);
+            width: 100px;
+        }
+
+        button:hover {
+            background-color: #1d7ddd;
+            color: rgb(232, 236, 243);
+     
+
+        }
+        h1, h4{
+            color: rgb(10, 32, 73);
+           
+        }
+    </style>
+    <script>
+
+
+        window.onload = function () {
+            document.addEventListener("contextmenu", event => preventDefault());
+        }
+        var limit = 3;
+
+        function login() {
+
+            var a = document.getElementById("username").value;
+            var b = document.getElementById("password").value;
+            var u = 'admin'
+            var p = 'pass'
+
+            if ((a == u) && (b == p)) {
+                window.location.replace("home.html");
+                alert("Log in Succesfully ");
+            }
+
+            else {
+                limit--;
+
+
+                alert("You may have keyed in a wrong Username or Password. You only left " + limit + " attempt(s)... ");
+
+                if (limit == 0) {
+                    var timeleft = 10;
+                    var downloadTimer = setInterval(function () {
+                        document.getElementById("login").disabled = true;
+                        document.getElementById("username").disabled = true;
+                        document.getElementById("password").disabled = true;
+                        document.getElementById('text').innerHTML = "You have exceeded the allowable attempt(s).<br> Please try again after " + timeleft + " seconds...";
+                        timeleft -= 1;
+                        if (timeleft <= 0) {
+                            clearInterval(downloadTimer);
+                            window.location.replace("log in form.html");
+                        }
+                    }, 900);
+
+                }
+
+            }
+        }
+        function reset() {
+			document.location.reload(true);
+	}
+  
+      
+
+    </script>
+</head>
+
+<body>
+    <center>
+        <h1>Admin Log-in</h1>
+        <div>
+            <br><h4>Please enter Username and Password</h4> <br>
+            Username <br>
+            <input type="text" id="username" required><br><br>
+            Password <br>
+            <input type="password" id="password" required><br><br><br>
+            <button type="button" onclick="login()" id="login">Submit</button>
+            <h5 id="demo"></h5>
+            <small><label id="text" style="color: red;"></label></small>
+        </div>
+    </center>
+</body>
+
+</html>
